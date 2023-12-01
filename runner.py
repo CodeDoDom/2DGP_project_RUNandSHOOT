@@ -61,6 +61,7 @@ class Run:
     @staticmethod
     def enter(runner, e):
         runner.action = 0
+        runner.frame = 0
 
     @staticmethod
     def do(runner):
@@ -103,6 +104,7 @@ class Jump:
     @staticmethod
     def enter(runner, e):
         runner.action = 1
+        runner.frame = 3
         runner.wait_time = get_time()
 
     @staticmethod
@@ -111,13 +113,13 @@ class Jump:
 
     @staticmethod
     def do(runner):
-        if get_time() - runner.wait_time > 0.5:
+        if int(runner.frame) == 10:
             runner.state_machine.handle_event(('TIME_OUT', 0))
         runner.frame = (runner.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 11
 
     @staticmethod
     def draw(runner):
-        runner.image.clip_draw(int(runner.frame) * 128, runner.action * 128, 100, 100, runner.x, runner.y)
+        runner.image.clip_draw(int(runner.frame) * 128, runner.action * 128, 100, 100, runner.x, runner.y + 25)
 
 
 class StateMachine:
