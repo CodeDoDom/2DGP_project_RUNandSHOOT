@@ -3,6 +3,7 @@ import game_framework
 
 import game_world
 from background import Background
+from hurdle import Hurdle
 from runner import Runner
 
 
@@ -20,14 +21,19 @@ def handle_events():
 def init():
     global runner
     global background
+    global h_drum
 
     running = True
 
-    background = Background()
-    game_world.add_object(background, 0)
+    # background = Background()
+    # game_world.add_object(background, 0)
+
+    h_drum = Hurdle()
+    game_world.add_object(h_drum, 1)
+
 
     runner = Runner()
-    game_world.add_object(runner, 1)
+    game_world.add_object(runner, 2)
 
 
 
