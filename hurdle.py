@@ -20,7 +20,25 @@ class Idle:
     def do(drum):
         if get_time() - drum.wait_time > 1.0:
             drum.state_machine.handle_event(('TIME_OUT', 0))
-            drum.x -= 1
+            # drum.x -= 1
+
+    @staticmethod
+    def draw(drum):
+        drum.image.clip_draw(0, 0, drum.w, drum.h, drum.x, drum.y)
+
+
+class Move:
+    @staticmethod
+    def enter(drum, e):
+        pass
+
+    @staticmethod
+    def exit(drum, e):
+        pass
+
+    @staticmethod
+    def do(drum):
+        drum.x -= 1
 
     @staticmethod
     def draw(drum):
@@ -32,7 +50,8 @@ class StateMachine:
         self.drum = drum
         self.cur_state = Idle
         self.transitions = {
-            Idle: {}
+            Idle: {time_out: Move},
+            Move: {}
         }
 
     def start(self):
