@@ -1,10 +1,12 @@
+import random
+
 from pico2d import *
 import game_framework
 
 import game_world
 from background import Background
-from hurdle import Hurdle
-from runner import Runner
+from drum import Drum
+from runner import Runner, Idle
 
 
 def handle_events():
@@ -21,16 +23,15 @@ def handle_events():
 def init():
     global runner
     global background
-    global drum
 
     running = True
 
     # background = Background()
     # game_world.add_object(background, 0)
 
-    drum = Hurdle()
-    game_world.add_object(drum, 1)
+    global wait_time
 
+    wait_time = get_time()
 
     runner = Runner()
     game_world.add_object(runner, 2)
@@ -43,6 +44,31 @@ def finish():
 
 
 def update():
+    global drum
+    global runner
+    global wait_time
+
+    if get_time() - wait_time > (random.random() * 100) + 0.3 and runner.state_machine.cur_state != Idle:
+        drum = Drum()
+        game_world.add_object(drum, 1)
+        wait_time = get_time()
+
+    # if get_time() - wait_time > 1.0 and runner.state_machine.cur_state != Idle:
+    # if get_time() - wait_time > random.randint(1, 150) and runner.state_machine.cur_state != Idle:
+    #     drum = Drum()
+    #     game_world.add_object(drum, 1)
+    #     wait_time = get_time()
+
+    # if get_time() - wait_time > 1.0 and runner.state_machine.cur_state != Idle:
+    #     if random.randint(1, 10) == 1:
+    #         drum = Drum()
+    #         game_world.add_object(drum, 1)
+    #         wait_time = get_time()
+
+
+    # drum = Drum()
+    # game_world.add_object(drum, 1)
+
     game_world.update()
     # delay(0.1)
 

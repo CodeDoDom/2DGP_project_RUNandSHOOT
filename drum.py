@@ -38,7 +38,7 @@ class Move:
 
     @staticmethod
     def do(drum):
-        drum.x -= 1
+        drum.x -= 1.0
 
     @staticmethod
     def draw(drum):
@@ -73,7 +73,7 @@ class StateMachine:
         self.cur_state.draw(self.drum)
 
 
-class Hurdle:
+class Drum:
     # image = None
     def __init__(self):
         self.x, self.y = 720, 160 # 이 y 좌표로 하면 캐릭터 점프 위치랑  완벽하게 맞음
@@ -87,8 +87,6 @@ class Hurdle:
     def update(self):
         # self.x -= 1
         self.state_machine.update()
-        # drum을 움직일 때, 3초 후에 runner이랑 동시에 움직여야 함.
-        # drum의 statemachine을 만들어야 할까?
 
     def handle_event(self, event):
         self.state_machine.handle_event(('INPUT', event))
