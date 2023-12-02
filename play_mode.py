@@ -21,15 +21,15 @@ def handle_events():
 def init():
     global runner
     global background
-    global h_drum
+    global drum
 
     running = True
 
     # background = Background()
     # game_world.add_object(background, 0)
 
-    h_drum = Hurdle()
-    game_world.add_object(h_drum, 1)
+    drum = Hurdle()
+    game_world.add_object(drum, 1)
 
 
     runner = Runner()
