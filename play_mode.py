@@ -7,6 +7,8 @@ import game_world
 from background import Background
 from drum import Drum
 from runner import Runner, Idle
+from target_O import TargetO
+from target_X import TargetX
 
 
 def handle_events():
@@ -23,18 +25,27 @@ def handle_events():
 def init():
     global runner
     global background
+    global wait_time
+    global targetO
+    global targetX
+
+    targetO = TargetO()
+    game_world.add_object(targetO, 1)
+
+    targetX = TargetX()
+    game_world.add_object(targetX, 1)
 
     running = True
+
+    wait_time = get_time()
 
     # background = Background()
     # game_world.add_object(background, 0)
 
-    global wait_time
-
-    wait_time = get_time()
-
     runner = Runner()
     game_world.add_object(runner, 2)
+
+    game_world.add_collision_pair('runner:drum', runner, None)
 
 
 
@@ -50,6 +61,7 @@ def update():
 
     if get_time() - wait_time > (random.random() * 100) + 0.3 and runner.state_machine.cur_state != Idle:
         drum = Drum()
+        game_world.add_collision_pair('runner:drum', None, drum)
         game_world.add_object(drum, 1)
         wait_time = get_time()
 
@@ -70,7 +82,11 @@ def update():
     # game_world.add_object(drum, 1)
 
     game_world.update()
-    # delay(0.1)
+
+    game_world.handle_collisions()
+
+    # if game_world.collide(runner, drum):
+    #     print('COLLISION runner:drum')
 
 
 def draw():

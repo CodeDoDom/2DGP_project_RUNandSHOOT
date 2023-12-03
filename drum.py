@@ -76,13 +76,15 @@ class StateMachine:
 class Drum:
     # image = None
     def __init__(self):
-        self.x, self.y = 500, 160 # 이 y 좌표로 하면 캐릭터 점프 위치랑  완벽하게 맞음
+        self.x, self.y = 500, 160   # 이 y 좌표로 하면 캐릭터 점프 위치랑  완벽하게 맞음
         self.w, self.h = 128, 128
         self.image = load_image('drum.png')
         self.state_machine = StateMachine(self)
         self.state_machine.start()
 
     def update(self):
+        if self.x <= -20:
+            game_world.remove_object(self)
         self.state_machine.update()
 
     def handle_event(self, event):
@@ -93,4 +95,8 @@ class Drum:
         draw_rectangle(*self.get_bb())
 
     def get_bb(self):
-        return self.x - 9, self.y - 64, self.x + 8, self.y - 40
+        return self.x - 9, self.y - 64, self.x + 7, self.y - 40
+
+    def handle_collision(self, group, other):
+        if group == 'runner:drum':
+            pass

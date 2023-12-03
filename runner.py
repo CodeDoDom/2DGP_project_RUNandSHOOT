@@ -26,7 +26,7 @@ RUN_SPEED_MPM = (RUN_SPEED_KMPH * 1000.0 / 60.0)
 RUN_SPEED_MPS = (RUN_SPEED_MPM / 60.0)
 RUN_SPEED_PPS = (RUN_SPEED_MPS * PIXEL_PER_METER)
 
-# Boy Action Speed
+# Runner Action Speed
 TIME_PER_ACTION = 0.5
 ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
 FRAMES_PER_ACTION = 8
@@ -48,12 +48,13 @@ class Idle:
         if get_time() - runner.wait_time > 1.0:
             runner.state_machine.handle_event(('TIME_OUT', 0))
         # runner.frame = (runner.frame + 1) % 8
-        runner.frame = (runner.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 1
+        runner.frame = (runner.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 6
 
     @staticmethod
     def draw(runner):
         # runner.image.draw(runner.x, runner.y)
         # runner.image.clip_draw(int(runner.frame) * 128, 0, 100, 100, runner.x, runner.y)
+        # runner.image.clip_draw(int(runner.frame) * 128, runner.action * 128, 100, 100, runner.x, runner.y, 128 * 2, 128 * 2)
         runner.image.clip_draw(int(runner.frame) * 128, runner.action * 128, 100, 100, runner.x, runner.y)
 
 
@@ -71,6 +72,7 @@ class Run:
 
     @staticmethod
     def draw(runner):
+        # runner.image.clip_draw(int(runner.frame) * 128, runner.action * 128, 100, 100, runner.x, runner.y, 128 * 2, 128 * 2)
         runner.image.clip_draw(int(runner.frame) * 128, runner.action * 128, 100, 100, runner.x, runner.y)
 
     @staticmethod
@@ -97,6 +99,7 @@ class Shot:
 
     @staticmethod
     def draw(runner):
+        # runner.image.clip_draw(int(runner.frame) * 128, runner.action * 128, 100, 100, runner.x, runner.y, 128 * 2, 128 * 2)
         runner.image.clip_draw(int(runner.frame) * 128, runner.action * 128, 100, 100, runner.x, runner.y)
 
 
@@ -119,7 +122,8 @@ class Jump:
 
     @staticmethod
     def draw(runner):
-        runner.image.clip_draw(int(runner.frame) * 128, runner.action * 128, 100, 100, runner.x, runner.y + 25)
+        # runner.image.clip_draw(int(runner.frame) * 128, runner.action * 128, 100, 100, runner.x, runner.y + 25, 128 * 2, 128 * 2)
+        runner.image.clip_draw(int(runner.frame) * 128, runner.action * 128, 100, 100, runner.x, runner.y + 18)
 
 
 class StateMachine:
@@ -158,7 +162,6 @@ class Runner:
         self.x, self.y = 100, 150
         self.frame = 0
         self.action = 3
-        # self.image = load_image('running.png')
         self.image = load_image('runner_animation.png')
         self.font = load_font('neodgm.TTF', 30)
         self.state_machine = StateMachine(self)
@@ -172,4 +175,17 @@ class Runner:
 
     def draw(self):
         self.state_machine.draw()
-        # self.font.draw(self.x - 10, self.y + 50, f'RUNNER', (255, 255, 0))
+        self.font.draw(self.x - 30, self.y + 50, f'RUNNER', (255, 255, 0))
+        draw_rectangle(*self.get_bb())
+
+    def get_bb(self):
+        if self.state_machine.cur_state == Run:
+            return self.x - 8, self.y - 50, self.x + 18, self.y + 14
+        elif self.state_machine.cur_state == Jump:
+            return self.x - 8, self.y - 20, self.x + 18, self.y + 34
+        else:
+            return 0, 0, 0, 0
+
+    def handle_collision(self, group, other):
+        if group == 'runner:drum':
+            print(f'hi')
