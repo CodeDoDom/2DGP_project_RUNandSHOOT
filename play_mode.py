@@ -26,11 +26,7 @@ def init():
     global runner
     global background
     global wait_time
-    global targetO
     global targetX
-
-    targetO = TargetO()
-    game_world.add_object(targetO, 1)
 
     targetX = TargetX()
     game_world.add_object(targetX, 1)
@@ -48,7 +44,6 @@ def init():
     game_world.add_collision_pair('runner:drum', runner, None)
 
 
-
 def finish():
     game_world.clear()
     pass
@@ -58,6 +53,13 @@ def update():
     global drum
     global runner
     global wait_time
+    global targetO
+
+    if get_time() - wait_time > random.randint(1, 5) and runner.state_machine.cur_state != Idle:
+        targetO = TargetO()
+        targetO.y -= random.randint(-100, 100)
+        game_world.add_object(targetO, 1)
+        wait_time = get_time()
 
     if get_time() - wait_time > (random.random() * 100) + 0.3 and runner.state_machine.cur_state != Idle:
         drum = Drum()
