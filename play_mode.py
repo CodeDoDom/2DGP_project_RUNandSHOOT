@@ -26,10 +26,6 @@ def init():
     global runner
     global background
     global wait_time
-    global targetX
-
-    targetX = TargetX()
-    game_world.add_object(targetX, 1)
 
     running = True
 
@@ -54,12 +50,20 @@ def update():
     global runner
     global wait_time
     global targetO
+    global targetX
 
-    if get_time() - wait_time > random.randint(1, 5) and runner.state_machine.cur_state != Idle:
-        targetO = TargetO()
-        targetO.y -= random.randint(-100, 100)
-        game_world.add_object(targetO, 1)
-        wait_time = get_time()
+    if runner.state_machine.cur_state != Idle:
+        if get_time() - wait_time > random.randint(1, 3):
+            targetO = TargetO()
+            targetO.y -= random.randint(-100, 100)
+            game_world.add_object(targetO, 1)
+            wait_time = get_time()
+
+        if get_time() - wait_time > random.randint(1, 5):
+            targetX = TargetX()
+            targetX.y -= random.randint(-100, 100)
+            game_world.add_object(targetX, 1)
+            wait_time = get_time()
 
     if get_time() - wait_time > (random.random() * 100) + 0.3 and runner.state_machine.cur_state != Idle:
         drum = Drum()
