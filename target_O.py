@@ -2,6 +2,8 @@ import random
 
 from pico2d import *
 
+import game_world
+
 
 class TargetO:
     def __init__(self):
@@ -11,7 +13,8 @@ class TargetO:
 
     def update(self):
         self.x -= 3
-        # self.y -= random.randint(-50, 50)
+        if self.x <= 100:
+            game_world.remove_object(self)
 
     def draw(self):
         self.image.draw(self.x, self.y)
