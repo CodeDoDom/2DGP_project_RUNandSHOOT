@@ -1,5 +1,3 @@
-import random
-
 from pico2d import *
 
 import game_world
@@ -7,7 +5,7 @@ import game_world
 
 class TargetO:
     def __init__(self):
-        self.x, self.y = 600, 500
+        self.x, self.y = 1000, 500
         self.w, self.h = 100, 100
         self.image = load_image('target_O.png')
 
