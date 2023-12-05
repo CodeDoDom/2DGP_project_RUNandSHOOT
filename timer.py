@@ -3,7 +3,7 @@ from pico2d import *
 
 class Timer:
     def __init__(self):
-        self.x, self.y = 640, 640
+        self.x, self.y = 620, 680
         self.sec = 90
         self.wait_time = get_time()
         self.font = load_font('neodgm.TTF', 30)
