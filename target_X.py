@@ -14,9 +14,11 @@ class TargetX:
         self.x -= 3
         if self.x <= 100:
             game_world.remove_object(self)
+
         if self.x - 50 <= server.runner.mx <= self.x + 50 and self.y - 50 <= server.runner.my <= self.y + 50:
             game_world.remove_object(self)
             server.runner.mx, server.runner.my = 0, 0
+            server.score.score -= 5
 
     def draw(self):
         self.image.draw(self.x, self.y)

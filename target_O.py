@@ -2,15 +2,6 @@ from pico2d import *
 
 import game_world
 import server
-from server import runner
-
-
-def mouse_down(e):
-    return e[0] == 'INPUT' and e[1].type == SDL_MOUSEBUTTONDOWN and e[1].button == SDL_BUTTON_LEFT
-
-
-def mouse_up(e):
-    return e[0] == 'INPUT' and e[1].type == SDL_MOUSEBUTTONUP and e[1].button == SDL_BUTTON_LEFT
 
 
 class TargetO:
@@ -25,8 +16,9 @@ class TargetO:
             game_world.remove_object(self)
 
         if self.x - 50 <= server.runner.mx <= self.x + 50 and self.y - 50 <= server.runner.my <= self.y + 50:
-            game_world.remove_object(self)
             server.runner.mx, server.runner.my = 0, 0
+            server.score.score += 10
+            game_world.remove_object(self)
 
     def draw(self):
         self.image.draw(self.x, self.y)

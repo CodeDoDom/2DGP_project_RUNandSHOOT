@@ -1,6 +1,7 @@
 from pico2d import *
 import game_world
 import game_framework
+import server
 
 
 def time_out(e):
@@ -81,6 +82,7 @@ class Drum:
         self.image = load_image('drum.png')
         self.state_machine = StateMachine(self)
         self.state_machine.start()
+        self.crash = False
 
     def update(self):
         if self.x <= -20:
@@ -95,8 +97,12 @@ class Drum:
         draw_rectangle(*self.get_bb())
 
     def get_bb(self):
-        return self.x - 9, self.y - 64, self.x + 7, self.y - 40
+        if self.crash == False:
+            return self.x - 7, self.y - 64, self.x + 5, self.y - 40
+        else:
+            return -10, -10, -10, -10   # return 0, 0, 0, 0일 시 오류
 
     def handle_collision(self, group, other):
         if group == 'runner:drum':
-            pass
+            self.crash = True
+            server.score.score -= 5
