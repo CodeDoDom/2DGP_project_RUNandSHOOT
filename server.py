@@ -5,3 +5,4 @@ background = None
 runner = None
 
 score = None
+timer = None

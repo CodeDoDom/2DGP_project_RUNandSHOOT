@@ -11,6 +11,7 @@ from runner import Runner, Idle
 from score import Score
 from target_O import TargetO
 from target_X import TargetX
+from timer import Timer
 
 
 def handle_events():
@@ -28,7 +29,6 @@ def handle_events():
 def init():
     global background
     global wait_time
-    global score
 
     running = True
 
@@ -42,6 +42,9 @@ def init():
 
     server.score = Score()
     game_world.add_object(server.score, 3)
+
+    server.timer = Timer()
+    game_world.add_object(server.timer, 3)
 
     game_world.add_collision_pair('runner:drum', server.runner, None)
 
