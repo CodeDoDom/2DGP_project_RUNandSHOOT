@@ -80,7 +80,7 @@ class Run:
         pass
 
 
-class Shot:
+class Shoot:
     @staticmethod
     def enter(runner, e):
         runner.action = 2
@@ -95,6 +95,7 @@ class Shot:
     def do(runner):
         if get_time() - runner.wait_time > 0.15:
             runner.state_machine.handle_event(('TIME_OUT', 0))
+
         runner.frame = (runner.frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 1
 
     @staticmethod
@@ -132,8 +133,8 @@ class StateMachine:
         self.cur_state = Idle
         self.transitions = {
             Idle: {time_out: Run},
-            Run: {time_out: Idle, mouse_down: Shot, space_down: Jump},
-            Shot: {time_out: Run},
+            Run: {time_out: Idle, mouse_down: Shoot, space_down: Jump},
+            Shoot: {time_out: Run},
             Jump: {time_out: Run}
         }
 
@@ -166,12 +167,15 @@ class Runner:
         self.font = load_font('neodgm.TTF', 30)
         self.state_machine = StateMachine(self)
         self.state_machine.start()
+        self.mx, self.my = 0, 0
 
     def update(self):
         self.state_machine.update()
 
     def handle_event(self, event):
         self.state_machine.handle_event(('INPUT', event))
+        if event.type == SDL_MOUSEBUTTONDOWN:
+            self.mx, self.my = event.x, 720 - 1 - event.y
 
     def draw(self):
         self.state_machine.draw()
