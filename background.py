@@ -1,5 +1,13 @@
 from pico2d import *
 
+import game_framework
+
+PIXEL_PER_METER = (10.0 / 0.3)  # 10 pixel 30 cm
+MOVE_SPEED_KMPH = 30.0  # Km / Hour
+MOVE_SPEED_MPM = (MOVE_SPEED_KMPH * 1000.0 / 60.0)
+MOVE_SPEED_MPS = (MOVE_SPEED_MPM / 60.0)
+MOVE_SPEED_PPS = (MOVE_SPEED_MPS * PIXEL_PER_METER)
+
 
 class Background:
     def __init__(self):
@@ -34,15 +42,25 @@ class Background:
         self.image5_copy = load_image('sky_5.png')
 
     def update(self):
-        self.x2 -= 1
-        self.x3 -= 1
-        self.x4 -= 3
-        self.x5 -= 2
+        # self.x2 -= 1
+        # self.x3 -= 1
+        # self.x4 -= 3
+        # self.x5 -= 2
+        #
+        # self.x2_copy -= 1
+        # self.x3_copy -= 1
+        # self.x4_copy -= 3
+        # self.x5_copy -= 2
 
-        self.x2_copy -= 1
-        self.x3_copy -= 1
-        self.x4_copy -= 3
-        self.x5_copy -= 2
+        self.x2 -= MOVE_SPEED_PPS*game_framework.frame_time * 1
+        self.x3 -= MOVE_SPEED_PPS*game_framework.frame_time * 1
+        self.x4 -= MOVE_SPEED_PPS*game_framework.frame_time * 1.5
+        self.x5 -= MOVE_SPEED_PPS*game_framework.frame_time * 2
+
+        self.x2_copy -= MOVE_SPEED_PPS*game_framework.frame_time * 1
+        self.x3_copy -= MOVE_SPEED_PPS*game_framework.frame_time * 1
+        self.x4_copy -= MOVE_SPEED_PPS*game_framework.frame_time * 1.5
+        self.x5_copy -= MOVE_SPEED_PPS*game_framework.frame_time * 2
 
     def draw(self):
         self.image1.draw(self.x1, self.y1)
@@ -54,23 +72,23 @@ class Background:
 #            self.x2_copy = 1280 + 640
 #        self.image2_copy.draw(self.x2_copy, self.y2_copy)
 
-        if self.x3 == -640:
+        if self.x3 <= -640:
             self.x3 = 1280 + 640
         self.image3.draw(self.x3, self.y3)
-        if self.x3_copy == -640:
+        if self.x3_copy <= -640:
             self.x3_copy = 1280 + 640
         self.image3_copy.draw(self.x3_copy, self.y3_copy)
 
-#        if self.x4 == -640:
-#            self.x4 = 1280 + 640
-#        self.image4.draw(self.x4, self.y4)
-#        if self.x4_copy == -640:
-#            self.x4_copy = 1280 + 640
-#        self.image4_copy.draw(self.x4_copy, self.y4_copy)
+        if self.x4 <= -640:
+            self.x4 = 1280 + 640
+        self.image4.draw(self.x4, self.y4)
+        if self.x4_copy <= -640:
+            self.x4_copy = 1280 + 640
+        self.image4_copy.draw(self.x4_copy, self.y4_copy)
 
-        if self.x5 == -640:
+        if self.x5 <= -640:
             self.x5 = 1280 + 640
         self.image5.draw(self.x5, self.y5)
-        if self.x5_copy == -640:
+        if self.x5_copy <= -640:
             self.x5_copy = 1280 + 640
         self.image5_copy.draw(self.x5_copy, self.y5_copy)
