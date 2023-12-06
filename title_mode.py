@@ -49,6 +49,6 @@ def update():
 
 def draw():
     clear_canvas()
-    image_char.clip_draw(int(frame) * 128, 0, 100, 100, 300, 250, 128 * 3, 128 * 3)
-    image_drum.draw(400, 500)
+    image_drum.clip_draw(0, 0, 128, 128, 200, 470, 128 * 6, 128 * 6)
+    image_char.clip_draw(int(frame) * 128, 0, 100, 100, 350, 270, 128 * 3, 128 * 3)
     update_canvas()
