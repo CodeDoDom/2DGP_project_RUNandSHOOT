@@ -5,6 +5,7 @@ import game_framework
 
 import game_world
 import server
+import title_mode
 from background import Background
 from drum import Drum
 from runner import Runner, Idle
@@ -15,13 +16,12 @@ from timer import Timer
 
 
 def handle_events():
-
     events = get_events()
     for event in events:
         if event.type == SDL_QUIT:
             game_framework.quit()
         elif event.type == SDL_KEYDOWN and event.key == SDLK_ESCAPE:
-            game_framework.quit()
+            game_framework.change_mode(title_mode)
         else:
             server.runner.handle_event(event)
 
