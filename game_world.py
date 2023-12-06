@@ -9,22 +9,25 @@ def handle_collisions():
                     a.handle_collision(group, b)
                     b.handle_collision(group, a)
 
+
 collision_pairs = {}
+
+
 def add_collision_pair(group, a, b):
     if group not in collision_pairs:
         # print(f'Added new group {group}')
-        collision_pairs[group] = [[],[]]
+        collision_pairs[group] = [[], []]
     if a:
         collision_pairs[group][0].append(a)
     if b:
         collision_pairs[group][1].append(b)
 
 
-def add_object(o, depth = 0):
+def add_object(o, depth=0):
     objects[depth].append(o)
 
 
-def add_objects(ol, depth = 0):
+def add_objects(ol, depth=0):
     objects[depth] += ol
 
 

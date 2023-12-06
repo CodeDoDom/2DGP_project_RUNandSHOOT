@@ -40,35 +40,18 @@ class Background:
         self.image5_copy = load_image('sky_5.png')
 
     def update(self):
-        # self.x2 -= 1
-        # self.x3 -= 1
-        # self.x4 -= 3
-        # self.x5 -= 2
-        #
-        # self.x2_copy -= 1
-        # self.x3_copy -= 1
-        # self.x4_copy -= 3
-        # self.x5_copy -= 2
+        self.x2 -= MOVE_SPEED_PPS * game_framework.frame_time * 1
+        self.x3 -= MOVE_SPEED_PPS * game_framework.frame_time * 1
+        self.x4 -= MOVE_SPEED_PPS * game_framework.frame_time * 1.5
+        self.x5 -= MOVE_SPEED_PPS * game_framework.frame_time * 2
 
-        self.x2 -= MOVE_SPEED_PPS*game_framework.frame_time * 1
-        self.x3 -= MOVE_SPEED_PPS*game_framework.frame_time * 1
-        self.x4 -= MOVE_SPEED_PPS*game_framework.frame_time * 1.5
-        self.x5 -= MOVE_SPEED_PPS*game_framework.frame_time * 2
-
-        self.x2_copy -= MOVE_SPEED_PPS*game_framework.frame_time * 1
-        self.x3_copy -= MOVE_SPEED_PPS*game_framework.frame_time * 1
-        self.x4_copy -= MOVE_SPEED_PPS*game_framework.frame_time * 1.5
-        self.x5_copy -= MOVE_SPEED_PPS*game_framework.frame_time * 2
+        self.x2_copy -= MOVE_SPEED_PPS * game_framework.frame_time * 1
+        self.x3_copy -= MOVE_SPEED_PPS * game_framework.frame_time * 1
+        self.x4_copy -= MOVE_SPEED_PPS * game_framework.frame_time * 1.5
+        self.x5_copy -= MOVE_SPEED_PPS * game_framework.frame_time * 2
 
     def draw(self):
         self.image1.draw(self.x1, self.y1)
-
-#        if self.x2 == -640:
-#            self.x2 = 1280 + 640
-#        self.image2.draw(self.x2, self.y2)
-#        if self.x2_copy == -640:
-#            self.x2_copy = 1280 + 640
-#        self.image2_copy.draw(self.x2_copy, self.y2_copy)
 
         if self.x3 <= -640:
             self.x3 = 1280 + 640

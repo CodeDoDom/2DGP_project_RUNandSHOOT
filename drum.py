@@ -7,6 +7,7 @@ import server
 def time_out(e):
     return e[0] == 'TIME_OUT'
 
+
 PIXEL_PER_METER = (10.0 / 0.3)  # 10 pixel 30 cm
 MOVE_SPEED_KMPH = 30.0  # Km / Hour
 MOVE_SPEED_MPM = (MOVE_SPEED_KMPH * 1000.0 / 60.0)
@@ -45,7 +46,7 @@ class Move:
     @staticmethod
     def do(drum):
         # drum.x -= 1.0
-        drum.x -= MOVE_SPEED_PPS*game_framework.frame_time
+        drum.x -= MOVE_SPEED_PPS * game_framework.frame_time
 
     @staticmethod
     def draw(drum):
@@ -83,7 +84,7 @@ class StateMachine:
 class Drum:
     # image = None
     def __init__(self):
-        self.x, self.y = 1300, 160   # 이 y 좌표로 하면 캐릭터 점프 위치랑  완벽하게 맞음
+        self.x, self.y = 1300, 160  # 이 y 좌표로 하면 캐릭터 점프 위치랑  완벽하게 맞음
         self.w, self.h = 128, 128
         self.image = load_image('drum.png')
         self.state_machine = StateMachine(self)
@@ -106,7 +107,7 @@ class Drum:
         if self.crash == False:
             return self.x - 9, self.y - 64, self.x + 8, self.y - 40
         else:
-            return -10, -10, -10, -10   # return 0, 0, 0, 0일 시 오류
+            return -10, -10, -10, -10
 
     def handle_collision(self, group, other):
         if group == 'runner:drum':

@@ -76,30 +76,15 @@ def update():
 
     if server.runner.state_machine.cur_state != Idle:
         if get_time() - wait_time > (random.random() * 50) + 0.1:
-        # if get_time() - wait_time > random.randint(1, 3):
+            # if get_time() - wait_time > random.randint(1, 3):
             drum = Drum()
             game_world.add_collision_pair('runner:drum', None, drum)
             game_world.add_object(drum, 1)
             wait_time = get_time()
 
-    # if get_time() - wait_time > 1.0 and runner.state_machine.cur_state != Idle:
-    # if get_time() - wait_time > random.randint(1, 150) and runner.state_machine.cur_state != Idle:
-    #     drum = Drum()
-    #     game_world.add_object(drum, 1)
-    #     wait_time = get_time()
-
-    # if get_time() - wait_time > 1.0 and runner.state_machine.cur_state != Idle:
-    #     if random.randint(1, 10) == 1:
-    #         drum = Drum()
-    #         game_world.add_object(drum, 1)
-    #         wait_time = get_time()
-
     game_world.update()
 
     game_world.handle_collisions()
-
-    # if game_world.collide(runner, drum):
-    #     print('COLLISION runner:drum')
 
 
 def draw():
@@ -107,9 +92,10 @@ def draw():
     game_world.render()
     update_canvas()
 
+
 def pause():
     pass
 
+
 def resume():
     pass
-

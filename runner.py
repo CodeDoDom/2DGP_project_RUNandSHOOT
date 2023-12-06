@@ -122,7 +122,6 @@ class Jump:
 
     @staticmethod
     def draw(runner):
-        # runner.image.clip_draw(int(runner.frame) * 128, runner.action * 128, 100, 100, runner.x, runner.y + 25, 128 * 2, 128 * 2)
         runner.image.clip_draw(int(runner.frame) * 128, runner.action * 128, 100, 100, runner.x, runner.y + 18)
 
 
@@ -159,6 +158,7 @@ class StateMachine:
 
 class Runner:
     runner_shoot_target = None
+
     def __init__(self):
         self.x, self.y = 100, 150
         self.frame = 0
@@ -197,4 +197,3 @@ class Runner:
     def handle_collision(self, group, other):
         if group == 'runner:drum':
             pass
-            # print(f'hi')

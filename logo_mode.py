@@ -10,7 +10,7 @@ def init():
     global logo_start_time
 
     image = load_image('sky_1.png')
-    running =True
+    running = True
     logo_start_time = get_time()
 
 
@@ -26,8 +26,6 @@ def update():
     if get_time() - logo_start_time >= 2.0:
         logo_start_time = get_time()
         game_framework.change_mode(title_mode)
-        # game_framework.quit()
-        # running = False
 
 
 def draw():

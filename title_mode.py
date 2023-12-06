@@ -3,7 +3,6 @@ from pico2d import *
 
 import play_mode
 
-
 PIXEL_PER_METER = (10.0 / 0.3)  # 10 pixel 30 cm
 MOVE_SPEED_KMPH = 30.0  # Km / Hour
 MOVE_SPEED_MPM = (MOVE_SPEED_KMPH * 1000.0 / 60.0)
@@ -36,6 +35,7 @@ def init():
     bgm = load_music('8_bit_air_fight.mp3')
     bgm.set_volume(40)
     bgm.repeat_play()
+
 
 def finish():
     global image_char, image_drum, image_sky1, image_sky4, image_sky5, font, font_1

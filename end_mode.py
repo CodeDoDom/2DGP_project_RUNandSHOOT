@@ -35,6 +35,7 @@ def init():
     f_x, f_y = 600, 650
     end_start_time = get_time()
 
+
 def finish():
     global image_char, image_drum, image_sky1, image_sky4, image_sky5, font, font_1
     del image_char, image_drum, image_sky1, image_sky4, image_sky5, font, font_1

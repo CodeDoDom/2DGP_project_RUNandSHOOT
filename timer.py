@@ -19,6 +19,5 @@ class Timer:
         if (self.sec // 60) < 0.0:
             game_framework.change_mode(end_mode)
 
-
     def draw(self):
         self.font.draw(self.x, self.y, f'{int(self.sec // 60)}:{self.sec % 60}', (255, 255, 255))
