@@ -53,8 +53,6 @@ class Idle:
 
     @staticmethod
     def draw(runner):
-        # runner.image.draw(runner.x, runner.y)
-        # runner.image.clip_draw(int(runner.frame) * 128, 0, 100, 100, runner.x, runner.y)
         # runner.image.clip_draw(int(runner.frame) * 128, runner.action * 128, 100, 100, runner.x, runner.y, 128 * 2, 128 * 2)
         runner.image.clip_draw(int(runner.frame) * 128, runner.action * 128, 100, 100, runner.x, runner.y)
 
@@ -160,6 +158,7 @@ class StateMachine:
 
 
 class Runner:
+    runner_shoot_target = None
     def __init__(self):
         self.x, self.y = 100, 150
         self.frame = 0
@@ -169,6 +168,10 @@ class Runner:
         self.state_machine = StateMachine(self)
         self.state_machine.start()
         self.mx, self.my = 0, 0
+
+        if not Runner.runner_shoot_target:
+            Runner.runner_shoot_target = load_wav('gun_sound.wav')
+            Runner.runner_shoot_target.set_volume(50)
 
     def update(self):
         self.state_machine.update()
@@ -193,4 +196,6 @@ class Runner:
 
     def handle_collision(self, group, other):
         if group == 'runner:drum':
+            # Runner.runner_shoot_target.play()
+            # game_world.remove_object(self)
             print(f'hi')
