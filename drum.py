@@ -83,7 +83,7 @@ class StateMachine:
 class Drum:
     # image = None
     def __init__(self):
-        self.x, self.y = 500, 160   # 이 y 좌표로 하면 캐릭터 점프 위치랑  완벽하게 맞음
+        self.x, self.y = 1300, 160   # 이 y 좌표로 하면 캐릭터 점프 위치랑  완벽하게 맞음
         self.w, self.h = 128, 128
         self.image = load_image('drum.png')
         self.state_machine = StateMachine(self)

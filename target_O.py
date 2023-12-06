@@ -13,7 +13,7 @@ MOVE_SPEED_PPS = (MOVE_SPEED_MPS * PIXEL_PER_METER)
 
 class TargetO:
     def __init__(self):
-        self.x, self.y = 1000, 500
+        self.x, self.y = 1300, 500
         self.w, self.h = 100, 100
         self.image = load_image('target_O.png')
 
