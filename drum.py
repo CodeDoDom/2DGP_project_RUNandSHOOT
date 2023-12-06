@@ -104,7 +104,7 @@ class Drum:
 
     def get_bb(self):
         if self.crash == False:
-            return self.x - 7, self.y - 64, self.x + 5, self.y - 40
+            return self.x - 8, self.y - 64, self.x + 7, self.y - 40
         else:
             return -10, -10, -10, -10   # return 0, 0, 0, 0일 시 오류
 
