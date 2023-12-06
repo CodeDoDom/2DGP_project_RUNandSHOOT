@@ -48,10 +48,9 @@ def update():
     global end_start_time
     global frame
 
-    # frame = (frame + 1) % 12
     frame = (frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 12
 
-    if get_time() - end_start_time >= 10.0:
+    if get_time() - end_start_time >= 5.0:
         end_start_time = get_time()
         game_framework.change_mode(title_mode)
 
@@ -63,7 +62,6 @@ def draw():
     image_sky5.draw(640, 360)
     image_drum.clip_draw(0, 0, 128, 128, 200, 470, 128 * 6, 128 * 6)
     image_char.clip_draw(int(frame) * 128, 0, 100, 100, 350, 270, 128 * 3, 128 * 3)
-    font.draw(f_x, f_y, f'Score: {server.score.score}', (0, 0, 0))
-    # font.draw(f_x, f_y - 100, f'RUN and SHOOT', (0, 0, 0))
-    # font_1.draw(f_x + 90, f_y - 170, f'Press Spacebar To Start', (255, 255, 255))
+    font.draw(f_x, f_y - 70, f'Score: {server.score.score}', (0, 0, 0))
+    font_1.draw(f_x + 90, f_y - 170, f'Waiting For Restart', (255, 255, 255))
     update_canvas()
