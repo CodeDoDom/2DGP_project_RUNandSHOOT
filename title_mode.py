@@ -19,15 +19,17 @@ def init():
     global image_char
     global image_drum
     global frame
+    global font, f_x, f_y
 
     frame = 0
     image_char = load_image('Shot.png')
     image_drum = load_image('drum.png')
-
+    font = load_font('neodgm.TTF', 100)
+    f_x, f_y = 600, 650
 
 def finish():
-    global image_char, image_drum
-    del image_char, image_drum
+    global image_char, image_drum, font
+    del image_char, image_drum, font
 
 
 def handle_events():
@@ -47,8 +49,11 @@ def update():
     # frame = (frame + 1) % 12
     frame = (frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 12
 
+
 def draw():
     clear_canvas()
     image_drum.clip_draw(0, 0, 128, 128, 200, 470, 128 * 6, 128 * 6)
     image_char.clip_draw(int(frame) * 128, 0, 100, 100, 350, 270, 128 * 3, 128 * 3)
+    font.draw(f_x, f_y, f'Project:', (0, 0, 0))
+    font.draw(f_x, f_y - 100, f'RUN and SHOOT', (0, 0, 0))
     update_canvas()
