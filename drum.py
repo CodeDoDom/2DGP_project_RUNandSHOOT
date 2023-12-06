@@ -111,4 +111,4 @@ class Drum:
     def handle_collision(self, group, other):
         if group == 'runner:drum':
             self.crash = True
-            server.score.score -= 5
+            server.score.score -= 2
