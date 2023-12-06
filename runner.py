@@ -196,6 +196,5 @@ class Runner:
 
     def handle_collision(self, group, other):
         if group == 'runner:drum':
-            # Runner.runner_shoot_target.play()
-            # game_world.remove_object(self)
-            print(f'hi')
+            pass
+            # print(f'hi')
