@@ -20,7 +20,7 @@ class TargetO:
     def update(self):
         # self.x -= 3
         self.x -= MOVE_SPEED_PPS*game_framework.frame_time
-        if self.x <= 100:
+        if self.x <= -50:
             game_world.remove_object(self)
 
         if self.x - 50 <= server.runner.mx <= self.x + 50 and self.y - 50 <= server.runner.my <= self.y + 50:
