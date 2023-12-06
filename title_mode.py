@@ -21,6 +21,7 @@ def init():
     global image_sky1, image_sky4, image_sky5
     global frame
     global font, font_1, f_x, f_y
+    global bgm
 
     frame = 0
     image_char = load_image('Shot.png')
@@ -31,6 +32,10 @@ def init():
     font = load_font('neodgm.TTF', 100)
     font_1 = load_font('neodgm.TTF', 50)
     f_x, f_y = 600, 650
+
+    bgm = load_music('8_bit_air_fight.mp3')
+    bgm.set_volume(40)
+    bgm.repeat_play()
 
 def finish():
     global image_char, image_drum, image_sky1, image_sky4, image_sky5, font, font_1
