@@ -25,8 +25,6 @@ class Background:
         self.x5, self.y5 = 0, 360
         self.x5_copy, self.y5_copy = 1280, 360
 
-        #self.w, self.h = 576, 324
-
         self.image1 = load_image('sky_1.png')
 
         self.image2 = load_image('sky_2.png')
