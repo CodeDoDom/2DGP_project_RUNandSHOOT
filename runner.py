@@ -183,8 +183,7 @@ class Runner:
 
     def draw(self):
         self.state_machine.draw()
-        self.font.draw(self.x - 30, self.y + 50, f'RUNNER', (255, 255, 0))
-        draw_rectangle(*self.get_bb())
+        # draw_rectangle(*self.get_bb())
 
     def get_bb(self):
         if self.state_machine.cur_state == Run:

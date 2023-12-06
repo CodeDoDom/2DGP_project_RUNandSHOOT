@@ -31,7 +31,7 @@ class TargetO:
 
     def draw(self):
         self.image.draw(self.x, self.y)
-        draw_rectangle(*self.get_bb())
+        # draw_rectangle(*self.get_bb())
 
     def get_bb(self):
         return self.x - 30, self.y - 30, self.x + 30, self.y + 30
