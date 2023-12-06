@@ -7,6 +7,12 @@ import server
 def time_out(e):
     return e[0] == 'TIME_OUT'
 
+PIXEL_PER_METER = (10.0 / 0.3)  # 10 pixel 30 cm
+MOVE_SPEED_KMPH = 30.0  # Km / Hour
+MOVE_SPEED_MPM = (MOVE_SPEED_KMPH * 1000.0 / 60.0)
+MOVE_SPEED_MPS = (MOVE_SPEED_MPM / 60.0)
+MOVE_SPEED_PPS = (MOVE_SPEED_MPS * PIXEL_PER_METER)
+
 
 class Idle:
     @staticmethod
@@ -21,7 +27,6 @@ class Idle:
     def do(drum):
         if get_time() - drum.wait_time > 1.0:
             drum.state_machine.handle_event(('TIME_OUT', 0))
-            # drum.x -= 1
 
     @staticmethod
     def draw(drum):
@@ -39,7 +44,8 @@ class Move:
 
     @staticmethod
     def do(drum):
-        drum.x -= 1.0
+        # drum.x -= 1.0
+        drum.x -= MOVE_SPEED_PPS*game_framework.frame_time
 
     @staticmethod
     def draw(drum):

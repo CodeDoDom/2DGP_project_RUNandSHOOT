@@ -1,7 +1,14 @@
 from pico2d import *
 
+import game_framework
 import game_world
 import server
+
+PIXEL_PER_METER = (10.0 / 0.3)  # 10 pixel 30 cm
+MOVE_SPEED_KMPH = 60.0  # Km / Hour
+MOVE_SPEED_MPM = (MOVE_SPEED_KMPH * 1000.0 / 60.0)
+MOVE_SPEED_MPS = (MOVE_SPEED_MPM / 60.0)
+MOVE_SPEED_PPS = (MOVE_SPEED_MPS * PIXEL_PER_METER)
 
 
 class TargetO:
@@ -11,7 +18,8 @@ class TargetO:
         self.image = load_image('target_O.png')
 
     def update(self):
-        self.x -= 3
+        # self.x -= 3
+        self.x -= MOVE_SPEED_PPS*game_framework.frame_time
         if self.x <= 100:
             game_world.remove_object(self)
 
