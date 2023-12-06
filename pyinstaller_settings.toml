@@ -1,8 +1,11 @@
 main_file = 'main.py'
 
 data_files = [
-    '8_bit_air_fight.mp3', 'drum.png', 'gun_sound.wav', 'ndodgm.TTF',
+    '8_bit_air_fight.mp3', 'drum.png', 'gun_sound.wav', 'neodgm.TTF',
     'runner_animation.png', 'Shot.png', 'sky_1.png', 'sky_2.png', 'sky_3.png',
     'sky_4.png', 'sky_5.png', 'target_O.png', 'target_X.png'
 ]
 
+data_folders = [
+
+]
