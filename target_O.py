@@ -26,6 +26,7 @@ class TargetO:
         if self.x - 50 <= server.runner.mx <= self.x + 50 and self.y - 50 <= server.runner.my <= self.y + 50:
             server.runner.mx, server.runner.my = 0, 0
             server.score.score += 10
+            server.runner.runner_shoot_target.play()
             game_world.remove_object(self)
 
     def draw(self):
