@@ -1,5 +1,6 @@
 from pico2d import *
 
+import end_mode
 import game_framework
 import logo_mode
 
@@ -16,7 +17,7 @@ class Timer:
             self.sec -= 1
             self.wait_time = get_time()
         if (self.sec // 60) < 0.0:
-            game_framework.change_mode(logo_mode)
+            game_framework.change_mode(end_mode)
 
 
     def draw(self):
