@@ -4,6 +4,17 @@ from pico2d import *
 import play_mode
 
 
+PIXEL_PER_METER = (10.0 / 0.3)  # 10 pixel 30 cm
+MOVE_SPEED_KMPH = 30.0  # Km / Hour
+MOVE_SPEED_MPM = (MOVE_SPEED_KMPH * 1000.0 / 60.0)
+MOVE_SPEED_MPS = (MOVE_SPEED_MPM / 60.0)
+MOVE_SPEED_PPS = (MOVE_SPEED_MPS * PIXEL_PER_METER)
+
+TIME_PER_ACTION = 0.5
+ACTION_PER_TIME = 1.0 / TIME_PER_ACTION
+FRAMES_PER_ACTION = 8
+
+
 def init():
     global image_char
     global image_drum
@@ -33,11 +44,11 @@ def handle_events():
 def update():
     global frame
 
-    frame = (frame + 1) % 12
-
+    # frame = (frame + 1) % 12
+    frame = (frame + FRAMES_PER_ACTION * ACTION_PER_TIME * game_framework.frame_time) % 12
 
 def draw():
     clear_canvas()
-    image_char.clip_draw(frame * 128, 0, 100, 100, 600, 300, 128 * 2, 128 * 2)
+    image_char.clip_draw(int(frame) * 128, 0, 100, 100, 300, 250, 128 * 3, 128 * 3)
     image_drum.draw(400, 500)
     update_canvas()
