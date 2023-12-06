@@ -18,18 +18,23 @@ FRAMES_PER_ACTION = 8
 def init():
     global image_char
     global image_drum
+    global image_sky1, image_sky4, image_sky5
     global frame
-    global font, f_x, f_y
+    global font, font_1, f_x, f_y
 
     frame = 0
     image_char = load_image('Shot.png')
     image_drum = load_image('drum.png')
+    image_sky1 = load_image('sky_1.png')
+    image_sky4 = load_image('sky_4.png')
+    image_sky5 = load_image('sky_5.png')
     font = load_font('neodgm.TTF', 100)
+    font_1 = load_font('neodgm.TTF', 50)
     f_x, f_y = 600, 650
 
 def finish():
-    global image_char, image_drum, font
-    del image_char, image_drum, font
+    global image_char, image_drum, image_sky1, image_sky4, image_sky5, font, font_1
+    del image_char, image_drum, image_sky1, image_sky4, image_sky5, font, font_1
 
 
 def handle_events():
@@ -52,8 +57,12 @@ def update():
 
 def draw():
     clear_canvas()
+    image_sky1.draw(640, 360)
+    image_sky4.draw(640, 360)
+    image_sky5.draw(640, 360)
     image_drum.clip_draw(0, 0, 128, 128, 200, 470, 128 * 6, 128 * 6)
     image_char.clip_draw(int(frame) * 128, 0, 100, 100, 350, 270, 128 * 3, 128 * 3)
     font.draw(f_x, f_y, f'Project:', (0, 0, 0))
     font.draw(f_x, f_y - 100, f'RUN and SHOOT', (0, 0, 0))
+    font_1.draw(f_x + 90, f_y - 170, f'Press Spacebar To Start', (255, 255, 255))
     update_canvas()
